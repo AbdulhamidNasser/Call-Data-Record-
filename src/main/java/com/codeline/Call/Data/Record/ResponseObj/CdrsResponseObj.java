@@ -11,7 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class CdrsResponseObj {
-    long id;
     String callerNumber;
     String receiverNumber;
     int duration;
