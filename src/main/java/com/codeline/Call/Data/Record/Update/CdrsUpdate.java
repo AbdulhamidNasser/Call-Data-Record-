@@ -1,6 +1,4 @@
-package com.codeline.Call.Data.Record.ResponseObj;
-
-
+package com.codeline.Call.Data.Record.Update;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -10,8 +8,11 @@ import lombok.NoArgsConstructor;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnalyicResponseObj {
+public class CdrsUpdate {
 
-    int averageDuration;
-    int totalCalls;
+
+    String callerNumber;
+    String receiverNumber;
+    int duration;
+    String timestamp;
 }
