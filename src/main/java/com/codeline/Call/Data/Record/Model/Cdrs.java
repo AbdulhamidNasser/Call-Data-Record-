@@ -16,10 +16,10 @@ import javax.persistence.Id;
 public class Cdrs {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
-    String callerNumber;
-    String receiverNumber;
-    int duration;
-    String timestamp;
+    public long id;
+    public String callerNumber;
+    public String receiverNumber;
+    public int duration;
+    public String timestamp;
 
 }

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class CdrsController {
 
@@ -35,6 +38,30 @@ public class CdrsController {
         cdrsObj.setTimestamp(cdrsRequestObj.getTimestamp());
         cdrsObj.setReceiverNumber(cdrsRequestObj.getReceiverNumber());
         cdrsService.uploadCdrs(cdrsObj);
+    }
+
+
+    @GetMapping("/api/search")
+     ResponseEntity<List<CdrsResponseObj>> searchCDRs(
+            @RequestParam("caller_number") String callerNumber,
+            @RequestParam("timestamp_from") String timestampFrom,
+            @RequestParam("timestamp_to") String timestampTo) {
+        List<Cdrs> cdrs = cdrsService.searchCDRs(callerNumber, timestampFrom, timestampTo);
+        List<CdrsResponseObj> cdrResponses = convertToCdrResponses(cdrs);
+        return ResponseEntity.ok(cdrResponses);
+    }
+
+    private List<CdrsResponseObj> convertToCdrResponses(List<Cdrs> cdrs) {
+        List<CdrsResponseObj> cdrResponses = new ArrayList<>();
+        for (Cdrs cdr : cdrs) {
+            cdrResponses.add(new CdrsResponseObj(
+                    cdr.getCallerNumber(),
+                    cdr.getReceiverNumber(),
+                    cdr.getDuration(),
+                    cdr.getTimestamp()
+            ));
+        }
+        return cdrResponses;
     }
 
 

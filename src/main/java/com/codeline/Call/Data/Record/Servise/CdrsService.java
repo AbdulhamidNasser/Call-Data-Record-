@@ -6,6 +6,7 @@ import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,5 +30,9 @@ public class CdrsService {
         }
 
 
+    }
+
+    public List<Cdrs> searchCDRs(String callerNumber, String timestampFrom, String timestampTo) {
+        return cdrsRepository.findByCallerNumberAndTimestampBetween(callerNumber, timestampFrom, timestampTo);
     }
 }
