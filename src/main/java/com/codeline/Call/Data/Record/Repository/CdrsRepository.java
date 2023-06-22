@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface CdrsRepository extends JpaRepository<Cdrs,Long> {
     List<Cdrs> findByCallerNumberAndTimestampBetween(String callerNumber, String timestampFrom, String timestampTo);
+
+    List<Cdrs> findByUsername(String username);
+
+
 }

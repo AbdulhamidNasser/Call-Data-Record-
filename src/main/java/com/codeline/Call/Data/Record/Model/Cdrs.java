@@ -17,9 +17,19 @@ public class Cdrs {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public long id;
+    String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public String callerNumber;
     public String receiverNumber;
     public int duration;
     public String timestamp;
+
 
 }

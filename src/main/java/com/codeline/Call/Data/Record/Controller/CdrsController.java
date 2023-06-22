@@ -4,6 +4,7 @@ package com.codeline.Call.Data.Record.Controller;
 import com.codeline.Call.Data.Record.Model.Cdrs;
 import com.codeline.Call.Data.Record.RequestObj.CdrsRequestObj;
 import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
+import com.codeline.Call.Data.Record.ResponseObj.ReportResponseObj;
 import com.codeline.Call.Data.Record.Servise.CdrsService;
 import com.codeline.Call.Data.Record.Update.CdrsUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,12 @@ public class CdrsController {
         String timestamp = update.getTimestamp();
         cdrsService.cdrupdate(cdrId, callerNumber,receiverNumber,duration,timestamp);
         return ResponseEntity.ok("cdr Modification successfully");
+    }
+
+    @GetMapping("/api/reports/user_summary")
+    public ResponseEntity<ReportResponseObj> getUserSummaryReport(@RequestParam("username") String username) {
+        ReportResponseObj report = cdrsService.getUserSummaryReport(username);
+        return ResponseEntity.ok(report);
     }
 
 

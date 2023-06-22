@@ -3,6 +3,7 @@ package com.codeline.Call.Data.Record.Servise;
 import com.codeline.Call.Data.Record.Model.Cdrs;
 import com.codeline.Call.Data.Record.Repository.CdrsRepository;
 import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
+import com.codeline.Call.Data.Record.ResponseObj.ReportResponseObj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,5 +51,19 @@ public class CdrsService {
             System.out.println("ERROR");
         }
     }
+
+    public ReportResponseObj getUserSummaryReport(String username) {
+        List<Cdrs> userCDRs = cdrsRepository.findByUsername(username);
+        int totalCalls = userCDRs.size();
+        int totalDuration = 0;
+        for (Cdrs cdr : userCDRs) {
+            totalDuration += cdr.getDuration();
+        }
+        double averageDuration = totalDuration / (double) totalCalls;
+
+        return new ReportResponseObj(username, totalCalls, totalDuration, averageDuration);
+    }
+
+
 
 }
