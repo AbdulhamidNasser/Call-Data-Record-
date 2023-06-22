@@ -5,6 +5,7 @@ import com.codeline.Call.Data.Record.Model.Cdrs;
 import com.codeline.Call.Data.Record.RequestObj.CdrsRequestObj;
 import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
 import com.codeline.Call.Data.Record.Servise.CdrsService;
+import com.codeline.Call.Data.Record.Update.CdrsUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +67,15 @@ public class CdrsController {
         return cdrResponses;
     }
 
-
+    @PutMapping("/api/cdrs/{cdrId}")
+    public ResponseEntity<String> cdrModification(@PathVariable Long cdrId, @RequestBody CdrsUpdate update) {
+        String callerNumber =  update.getCallerNumber();
+        String receiverNumber = update.getReceiverNumber();
+        int duration = update.getDuration();
+        String timestamp = update.getTimestamp();
+        cdrsService.cdrupdate(cdrId, callerNumber,receiverNumber,duration,timestamp);
+        return ResponseEntity.ok("cdr Modification successfully");
+    }
 
 
 
