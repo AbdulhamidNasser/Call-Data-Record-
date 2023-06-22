@@ -30,6 +30,8 @@ public class Cdrs {
     public String receiverNumber;
     public int duration;
     public String timestamp;
+    public Integer month;
+    public Integer year;
 
 
 }

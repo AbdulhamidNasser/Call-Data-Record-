@@ -12,5 +12,7 @@ public interface CdrsRepository extends JpaRepository<Cdrs,Long> {
 
     List<Cdrs> findByUsername(String username);
 
+    List<Cdrs> findByUsernameAndMonthAndYear(String username, int month, int year);
+
 
 }

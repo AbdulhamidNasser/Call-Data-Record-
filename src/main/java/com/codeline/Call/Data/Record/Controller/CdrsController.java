@@ -3,6 +3,7 @@ package com.codeline.Call.Data.Record.Controller;
 
 import com.codeline.Call.Data.Record.Model.Cdrs;
 import com.codeline.Call.Data.Record.RequestObj.CdrsRequestObj;
+import com.codeline.Call.Data.Record.ResponseObj.Billing;
 import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
 import com.codeline.Call.Data.Record.ResponseObj.ReportResponseObj;
 import com.codeline.Call.Data.Record.Servise.CdrsService;
@@ -83,6 +84,18 @@ public class CdrsController {
         ReportResponseObj report = cdrsService.getUserSummaryReport(username);
         return ResponseEntity.ok(report);
     }
+
+
+
+    @GetMapping("/api/billing/user_statement")
+    public ResponseEntity<Billing> getUserStatement(
+            @RequestParam("username") String username,
+            @RequestParam("month") int month,
+            @RequestParam("year") int year) {
+        Billing statement = cdrsService.getBilling(username, month, year);
+        return ResponseEntity.ok(statement);
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.codeline.Call.Data.Record.Servise;
 
 import com.codeline.Call.Data.Record.Model.Cdrs;
 import com.codeline.Call.Data.Record.Repository.CdrsRepository;
+import com.codeline.Call.Data.Record.ResponseObj.Billing;
 import com.codeline.Call.Data.Record.ResponseObj.CdrsResponseObj;
 import com.codeline.Call.Data.Record.ResponseObj.ReportResponseObj;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,24 @@ public class CdrsService {
         double averageDuration = totalDuration / (double) totalCalls;
 
         return new ReportResponseObj(username, totalCalls, totalDuration, averageDuration);
+    }
+
+
+
+    public Billing getBilling(String username, int month, int year) {
+        List<Cdrs> userCDRs = cdrsRepository.findByUsernameAndMonthAndYear(username, month, year);
+        int totalCalls = userCDRs.size();
+        int totalDuration = 0;
+        for (Cdrs cdr : userCDRs) {
+            totalDuration += cdr.getDuration();
+        }
+        double totalCharge = calculateTotalCharge(totalDuration);
+
+        return new Billing(username, month, year, totalCalls, totalDuration, totalCharge);
+    }
+
+    private double calculateTotalCharge(int totalDuration) {
+        return totalDuration * 0.034;
     }
 
 
