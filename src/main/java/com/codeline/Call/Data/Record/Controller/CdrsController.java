@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class CdrsController {
@@ -42,7 +44,7 @@ public class CdrsController {
 
 
     @GetMapping("/api/search")
-     ResponseEntity<List<CdrsResponseObj>> searchCDRs(
+    ResponseEntity<List<CdrsResponseObj>> searchCDRs(
             @RequestParam("caller_number") String callerNumber,
             @RequestParam("timestamp_from") String timestampFrom,
             @RequestParam("timestamp_to") String timestampTo) {
@@ -63,6 +65,16 @@ public class CdrsController {
         }
         return cdrResponses;
     }
+
+
+
+
+
+
+
+
+
+
 
 
 
